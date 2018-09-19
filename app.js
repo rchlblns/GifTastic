@@ -12,7 +12,7 @@ $(document).ready(function() {
 
     var dogBreeds = ["german shepherd", "labrador retriever", "american staffordshire terrier", "basset hound", "bichon frise", "rat terrier", "dachshund", "corgi"];
 
-    // function to create the inital buttons
+    // loop to create the inital buttons
     for (var i =0; i < dogBreeds.length; i++) {
         var dogBtn = $("<button>");
         dogBtn.addClass("dog-button");
@@ -46,4 +46,18 @@ $(document).ready(function() {
 
         renderButtons();
     });
+
+    //function for displaying gifs on the page
+    function displayDogGif() {
+        
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=a6Np9Ivm9wDWPNe2DdjM0dL5uU7bysex&limit=5"
+
+        $.ajax ({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+        });
+    }
+
 });

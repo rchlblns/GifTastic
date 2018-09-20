@@ -50,14 +50,19 @@ $(document).ready(function() {
     //function for displaying gifs on the page
     function displayDogGif() {
         
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=a6Np9Ivm9wDWPNe2DdjM0dL5uU7bysex&limit=5"
+        var dog = $(this).attr("data-name");
+        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=a6Np9Ivm9wDWPNe2DdjM0dL5uU7bysex&limit=10"
 
         $.ajax ({
             url: queryURL,
             method: "GET"
         }).then(function(response){
             console.log(response);
+            $("#gifs").text(JSON.stringify(response));
         });
     }
 
+    $(document).on("click", ".dog-breed", displayDogGif);
+
+    renderButtons();
 });

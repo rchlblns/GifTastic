@@ -10,7 +10,7 @@ $(document).ready(function() {
     //add a form to your page takes the value from user input box and add it to "topics" array
     //make a function call that takes each topic in the array remakes the buttons on the page
 
-    var dogBreeds = ["german shepherd", "labrador retriever", "american staffordshire terrier", "basset hound", "bichon frise", "rat terrier", "dachshund", "corgi"];
+    var dogBreeds = ["german shepherd", "labrador retriever", "american pit bull terrier", "basset hound", "bichon frise", "shiba inu", "dachshund", "corgi"];
 
     // loop to create the inital buttons
     for (var i =0; i < dogBreeds.length; i++) {
@@ -53,16 +53,33 @@ $(document).ready(function() {
         var dog = $(this).attr("data-name");
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=a6Np9Ivm9wDWPNe2DdjM0dL5uU7bysex&limit=10"
 
+        //ajax call
         $.ajax ({
             url: queryURL,
             method: "GET"
         }).then(function(response){
             console.log(response);
-            $("#gifs").text(JSON.stringify(response));
+            // 
+            var results = response.data;
+
+            for (var i = 0; i <results.length; i++) {
+                var animalDiv = $("<div>");
+                var p = $("<p>");
+                p.text(results[i].rating);
+                var animalImage = $("<img>");
+                animalImage.attr("src", results[i].images.fixed_height.url);
+                animalImage.addClass("pic")
+                animalDiv.append(p);
+                animalDiv.append(animalImage);
+                $("#gifs").prepend(animalDiv);
+            }
         });
+
+        // if ()
     }
 
     $(document).on("click", ".dog-breed", displayDogGif);
+    
+        renderButtons();
 
-    renderButtons();
 });

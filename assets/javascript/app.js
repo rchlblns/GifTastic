@@ -45,7 +45,7 @@ $(document).ready(function() {
     function displayDogGif() {
         
         var dog = $(this).attr("data-name");
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=a6Np9Ivm9wDWPNe2DdjM0dL5uU7bysex&limit=10"
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=a6Np9Ivm9wDWPNe2DdjM0dL5uU7bysex&limit=10"
 
         //ajax call to fetch gifs
         $.ajax ({

@@ -62,7 +62,7 @@ $(document).ready(function() {
                 if (results[i].rating !== "r" && results[i].rating !== "pg-13") {
                     var animalDiv = $("<div>");
                     var p = $("<p>");
-                    p.text(results[i].rating);
+                    p.text("rating: " + results[i].rating);
                     var animalImage = $("<img>");
                     animalImage.attr("src", results[i].images.fixed_height_still.url);
                     animalImage.attr("data-still", results[i].images.fixed_height_still.url);

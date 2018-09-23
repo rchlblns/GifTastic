@@ -36,6 +36,8 @@ $(document).ready(function() {
         }
     }
 
+    renderButtons();
+
     //click event that handles what happends when the "add" button is clicked
     $("#new-breed").on("click", function(event){
         event.preventDefault();
@@ -55,7 +57,7 @@ $(document).ready(function() {
         var dog = $(this).attr("data-name");
         var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + dog + "&api_key=a6Np9Ivm9wDWPNe2DdjM0dL5uU7bysex&limit=10"
 
-        //ajax call
+        //ajax call to fetch gifs
         $.ajax ({
             url: queryURL,
             method: "GET"
@@ -72,7 +74,7 @@ $(document).ready(function() {
                     var p = $("<p>");
                     p.text(results[i].rating);
                     var animalImage = $("<img>");
-                    animalImage.attr("src", results[i].images.fixed_height.url);
+                    animalImage.attr("src", results[i].images.fixed_height_still.url);
                     animalImage.attr("data-still", results[i].images.fixed_height_still.url);
                     animalImage.attr("data-animate", results[i].images.fixed_height.url);
                     animalImage.attr("data-state", "still");
@@ -82,44 +84,45 @@ $(document).ready(function() {
                     $("#gifs").prepend(animalDiv);
                 }
             }
+
         });
 
         // $("#gifs").on("click", function() {
-        
-        //     state = $(this).attr("data-state");
-
+            
+        //     var state = $(this).attr("data-state");
+        //     var still = $(this).attr("data-animate");
+        //     var animate = $(this).attr("data-still");
+    
         //     if (state === "still") {
-        //         $(this).attr("src", $(this).attr("data-animate"));
+        //         $(this).attr("src", animate);
         //         $(this).attr("data-state", "animate");
         //     }
         //     else {
-        //         $(this).attr("src", $(this).attr("data-still"));
+        //         $(this).attr("src", still);
         //         $(this).attr("data-state", "still");
         //     }
         // });
+
     }
 
     function changeState(){
-
-        $("#gifs").on("click", function() {
             
-            state = $(this).attr("data-state");
-
-            if (state === "still") {
-                $(this).attr("src", $(this).attr("data-animate"));
-                $(this).attr("data-state", "animate");
-            }
-            else {
-                $(this).attr("src", $(this).attr("data-still"));
-                $(this).attr("data-state", "still");
-            }
-        });
+        var state = $(this).attr("data-state");
+        var still = $(this).attr("data-animate");
+        var animate = $(this).attr("data-still");
+    
+        if (state === "still") {
+            $(this).attr("src", animate);
+            $(this).attr("data-state", "animate");
+        }
+        else {
+            $(this).attr("src", still);
+            $(this).attr("data-state", "still");
+        }
 
     }   
 
     $(document).on("click", ".dog-breed", displayDogGif);
-
-        renderButtons();
 
     $(document).on("click", ".pic", changeState);
     
